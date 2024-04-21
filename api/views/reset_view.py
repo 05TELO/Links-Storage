@@ -12,7 +12,20 @@ from rest_framework.views import APIView
 
 
 class ResetView(APIView):
+    """
+    API endpoint for resetting user password.
+    """
+
     def post(self, request: Request) -> Response:
+        """
+        Reset user password and send new password via email.
+
+        :param request: HTTP request object containing user email.
+        :type request: Request
+
+        :returns: JSON response with a message indicating the status of the password reset operation.
+        :rtype: Response
+        """
         email = request.data.get("email")
         characters = string.ascii_letters + string.digits + "!@#$%^&*()_+=-"
         new_password = "".join(random.choices(characters, k=12))

@@ -6,8 +6,21 @@ from bs4 import BeautifulSoup
 
 
 class ParserOG:
+    """
+    Util class to parse Open Graph (OG) data from HTML content.
+    """
+
     @classmethod
     def _fetch_html_data(cls, link: str) -> bytes:
+        """
+        Fetch HTML content from the provided link.
+
+        :param link: The URL from which to fetch the HTML content.
+        :type link: str
+
+        :returns: HTML content in bytes format.
+        :rtype: bytes
+        """
         try:
             response = requests.get(link)
             response.raise_for_status()
@@ -17,6 +30,18 @@ class ParserOG:
 
     @classmethod
     def _parse_og(cls, html_content: bytes, link: str) -> Dict[str, Any]:
+        """
+        Parse Open Graph data from HTML content.
+
+        :param html_content: HTML content in bytes format.
+        :type html_content: bytes
+
+        :param link: The URL for which the Open Graph data is parsed.
+        :type link: str
+
+        :returns: A dictionary containing parsed Open Graph data.
+        :rtype: Dict[str, Any]
+        """
         soup = BeautifulSoup(html_content, "html.parser")
         og_title = soup.find("meta", property="og:title")
         og_description = soup.find("meta", property="og:description")
@@ -45,6 +70,15 @@ class ParserOG:
 
     @classmethod
     def extract_data_from_html(cls, link: str) -> Dict[str, Any]:
+        """
+        Extract Open Graph data from the provided URL link.
+
+        :param link: The URL from which to extract Open Graph data.
+        :type link: str
+
+        :returns: A dictionary containing extracted Open Graph data.
+        :rtype: Dict[str, Any]
+        """
         html_content = cls._fetch_html_data(link)
         data = cls._parse_og(html_content, link)
         return data

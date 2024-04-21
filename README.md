@@ -32,7 +32,7 @@ Before doing something, make sure that you have
 
 ## Run Project
 
-> docker-compose up
+> docker-compose up -d
 
 ---
 

@@ -8,9 +8,28 @@ from rest_framework.views import APIView
 
 
 class UserLogin(APIView):
+    """
+    API endpoint for user login.
+
+    :param request: The HTTP request object.
+    :type request: Request
+
+    :returns: JSON response with user authentication status and token if successful.
+    :rtype: Response
+    """
+
     permission_classes = [AllowAny]
 
     def post(self, request: Request) -> Response:
+        """
+        Authenticate user based on email and password.
+
+        :param request: HTTP request object containing user email and password.
+        :type request: Request
+
+        :returns: JSON response with user authentication status and token if successful.
+        :rtype: Response
+        """
         email = request.data.get("email")
         password = request.data.get("password")
 

@@ -6,9 +6,30 @@ from rest_framework.views import APIView
 
 
 class ChangePassword(APIView):
+    """
+    API endpoint for changing user password.
+
+    :permission_classes: [permissions.IsAuthenticated]
+
+    :param request: The HTTP request object.
+    :type request: Request
+
+    :returns: JSON response with a message indicating the success of password change.
+    :rtype: Response
+    """
+
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request: Request) -> Response:
+        """
+        Change user password.
+
+        :param request: HTTP request object containing user data and new password.
+        :type request: Request
+
+        :returns: JSON response with a message indicating the success of password change.
+        :rtype: Response
+        """
         user = request.user
         new_password = str(request.data.get("new_password"))
 
